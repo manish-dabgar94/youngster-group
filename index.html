@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+
+<html lang="gu"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Youngster Group - માસિક હિસાબ, બચત અને ધિરાણ વિગતવાર રિપોર્ટ</title>
+<!-- Google Fonts: Inter & Noto Sans Gujarati -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+Gujarati:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Font Awesome 6 Icons -->
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" referrerpolicy="no-referrer" rel="stylesheet"/>
+<!-- html2pdf.js for Guaranteed PDF Export -->
+<script crossorigin="anonymous" referrerpolicy="no-referrer" src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brandDark: '#0d1929',
+            brandBlue: '#0284c7',
+            brandCyan: '#38bdf8',
+            brandOrange: '#ea580c',
+            brandGreen: '#047857',
+            cardBg: '#f8fafc',
+            borderSoft: '#e2e8f0',
+          },
+          fontFamily: {
+            gujarati: ['"Noto Sans Gujarati"', 'Inter', 'sans-serif'],
+            sans: ['Inter', '"Noto Sans Gujarati"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    body {
+      font-family: 'Noto Sans Gujarati', 'Inter', sans-serif;
+      background-color: #eef2f6;
+      color: #1e293b;
+    }
+    
+    .num-badge {
+      min-width: 1.75rem;
+      height: 1.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 8mm 10mm 8mm 10mm;
+      }
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      .no-print, header, #entryModal, #toastNotification, #secretCodeCard, #storageStatusBanner, #securityConfirmModal, #floatingSaveBar, #jsonBackupModal, #jsonImportModal {
+        display: none !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      .print-shadow-none {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+      #report-container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 4px !important;
+        box-shadow: none !important;
+        background-color: #ffffff !important;
+        border: none !important;
+      }
+      .print-input-display {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        text-align: right !important;
+        box-shadow: none !important;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    .locked-mode .edit-protected {
+      opacity: 0.65;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+    }
+    .locked-mode input.edit-protected-input {
+      background-color: #f1f5f9 !important;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    .transition-card {
+      transition: all 0.2s ease-in-out;
+    }
+    .transition-card:hover {
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 antialiased flex flex-col justify-between selection:bg-cyan-500 selection:text-white locked-mode pb-20 sm:pb-8">
+<!-- Toast Notification -->
+<div class="fixed top-5 right-5 z-50 transform transition-all duration-300 translate-y-[-120%] opacity-0 bg-rose-900 border border-rose-600 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-semibold" id="toastNotification">
+<i class="fa-solid fa-triangle-exclamation text-amber-300 text-sm" id="toastIcon"></i>
+<span id="toastMessage">સૂચના</span>
+</div>
+<!-- Header Navigation -->
+<header class="no-print bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-50 shadow-md">
+<div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center space-x-3">
+<div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-600 to-sky-400 flex items-center justify-center font-black text-white text-lg shadow-inner">
+        YG
+      </div>
+<div>
+<span class="font-bold text-lg tracking-wide text-white flex items-center gap-2">
+          Youngster Group
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-700/50" id="headerBadgeYear">2026 Admin Portal</span>
+</span>
+<span class="text-xs text-slate-400 block -mt-0.5 font-sans">Digital Ledger &amp; Recovery Tracker</span>
+</div>
+</div>
+<!-- Action Controls -->
+<div class="flex items-center flex-wrap gap-2">
+<div class="flex items-center gap-1.5 bg-slate-950/70 border border-slate-700/80 rounded-lg p-1" title="મહિનો અને વર્ષ લૉક છે">
+<div class="flex items-center gap-1 px-1.5 py-0.5 text-slate-400 text-xs">
+<i class="fa-solid fa-lock text-[10px] text-amber-400"></i>
+</div>
+<select class="text-xs bg-slate-900 border-0 text-slate-300 rounded px-2 py-1 font-medium cursor-not-allowed opacity-85" disabled="" id="monthSelector">
+<option value="0">જાન્યુઆરી</option>
+<option value="1">ફેબ્રુઆરી</option>
+<option value="2">માર્ચ</option>
+<option value="3">એપ્રિલ</option>
+<option value="4">મે</option>
+<option value="5">જૂન</option>
+<option value="6">જુલાઈ</option>
+<option value="7">ઓગસ્ટ</option>
+<option selected="" value="8">સપ્ટેમ્બર</option>
+<option value="9">ઓક્ટોબર</option>
+<option value="10">નવેમ્બર</option>
+<option value="11">ડિસેમ્બર</option>
+</select>
+<select class="text-xs bg-slate-900 border-0 text-slate-300 rounded px-2 py-1 font-medium font-mono cursor-not-allowed opacity-85" disabled="" id="yearSelector">
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+<option selected="" value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
+</select>
+</div>
+<button class="inline-flex items-center gap-1.5 text-xs font-semibold bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white px-3 py-1.5 rounded-lg shadow-sm transition active:scale-95 cursor-pointer" id="headerCarryForwardBtn" onclick="requestSecureCarryForward()" title="આગામી મહિનો કેરી ફોરવર્ડ">
+<i class="fa-solid fa-forward-step text-[11px]"></i>
+<span>આગામી મહિનો (કેરી ફોરવર્ડ)</span>
+</button>
+<div class="relative">
+<i class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+<input class="w-28 sm:w-36 text-xs bg-slate-800 border border-slate-700 rounded-lg pl-8 pr-3 py-1.5 text-slate-200 placeholder-slate-400 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition" id="memberSearchInput" onkeyup="filterMembers()" placeholder="સભ્ય શોધો..." type="text"/>
+</div>
+<button class="inline-flex items-center gap-1.5 text-xs font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white px-3.5 py-1.5 rounded-lg shadow-md ring-1 ring-emerald-400/40 transition active:scale-95 cursor-pointer" id="headerSaveDataBtn" onclick="handleExplicitSaveData()">
+<i class="fa-solid fa-floppy-disk text-[12px] text-emerald-100" id="headerSaveBtnIcon"></i>
+<span id="headerSaveBtnText">💾 ડેટા સેવ કરો (Save Data)</span>
+</button>
+<button class="inline-flex items-center gap-1.5 text-xs font-bold bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white px-3.5 py-1.5 rounded-lg shadow-sm transition active:scale-95 cursor-pointer ring-1 ring-sky-300/40" id="headerImportJsonBtn" onclick="openImportModalOrTriggerFile()">
+<i class="fa-solid fa-file-import text-[12px]"></i>
+<span>📥 ઈમ્પોર્ટ JSON</span>
+</button>
+<button class="inline-flex items-center gap-1.5 text-xs font-bold bg-amber-600 hover:bg-amber-500 text-white px-3.5 py-1.5 rounded-lg shadow-sm transition active:scale-95 cursor-pointer" id="headerExportJsonBtn" onclick="exportJSONData()">
+<i class="fa-solid fa-code text-[12px]"></i>
+<span>JSON એક્સપોર્ટ</span>
+</button>
+<button class="inline-flex items-center gap-1.5 text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white px-3.5 py-1.5 rounded-lg shadow-sm transition active:scale-95 cursor-pointer" onclick="exportPDFReport()">
+<i class="fa-solid fa-file-pdf text-[12px]"></i>
+<span>પ્રિન્ટ / PDF</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Storage Status Banner -->
+<section class="no-print max-w-6xl mx-auto px-2 sm:px-4 pt-2.5 pb-0" id="storageStatusBanner">
+<div class="bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-700/60 font-semibold text-[11px]" id="saveStateBadge">
+<i class="fa-solid fa-cloud-arrow-up text-[10px]"></i>
+<span id="saveStateBadgeText">💾 ડેટા સેવ થયેલ છે (LocalStorage)</span>
+</span>
+<span class="hidden md:inline text-slate-400 text-[11px]">તમે કરેલા તમામ ફેરફારો આપોઆપ સુરક્ષિત રહે છે.</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1 text-[11px] font-bold bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded-lg shadow ring-1 ring-emerald-300/50 cursor-pointer" onclick="handleExplicitSaveData()">
+<i class="fa-solid fa-floppy-disk text-[10px]"></i>
+<span>💾 સેવ કરો</span>
+</button>
+<button class="inline-flex items-center gap-1 text-[11px] font-semibold text-rose-300 hover:text-rose-200 hover:underline px-2 py-0.5 rounded cursor-pointer" onclick="handleProtectedAction(resetToDefaults)">
+<i class="fa-solid fa-arrow-rotate-left text-[10px]"></i>
+<span>મૂળ ડેટા રીસેટ</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Secret Code Authorization Bar -->
+<section class="no-print max-w-6xl mx-auto px-2 sm:px-4 pt-2 pb-1" id="secretCodeCard">
+<div class="bg-gradient-to-r from-slate-900 via-[#132238] to-slate-900 border-2 border-amber-500/60 rounded-2xl p-3 sm:p-4 shadow-lg flex flex-col md:flex-row items-center justify-between gap-3 text-white transition-all duration-200" id="securityBannerBox">
+<div class="flex items-center gap-3 w-full md:w-auto">
+<div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-lg shrink-0" id="lockIconBox">
+<i class="fa-solid fa-lock" id="mainLockIcon"></i>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-bold text-sm sm:text-base text-white tracking-wide">સિક્રેટ કોડ (Secret Admin Access / Code)</span>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">Code: 1234</span>
+</div>
+<p class="text-xs text-slate-300 font-normal mt-0.5" id="lockNoticeDesc">
+          લૉક સ્થિતિમાં કોઈ એડિટ થશે નહીં. ફેરફાર માટે કોડ 1234 દાખલ કરો.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-2 w-full md:w-auto justify-end">
+<div class="flex items-center gap-1.5 w-full sm:w-auto" id="secretInputContainer">
+<div class="relative flex-1 sm:w-56">
+<i class="fa-solid fa-key absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+<input class="w-full text-xs font-mono bg-slate-800 text-white placeholder-slate-400 border border-slate-600 rounded-lg pl-8 pr-2.5 py-2 focus:ring-2 focus:ring-amber-400 focus:outline-none transition" id="secretPasscode" onkeydown="if(event.key==='Enter')verifySecretCode()" placeholder="ગુપ્ત કોડ (દા.ત. 1234)..." type="password"/>
+</div>
+<button class="text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2 rounded-lg shadow-md transition active:scale-95 shrink-0 flex items-center gap-1.5 cursor-pointer" onclick="verifySecretCode()" type="button">
+<i class="fa-solid fa-arrow-right-to-bracket text-[11px]"></i>
+<span>ગો (Go) / અનલૉક</span>
+</button>
+</div>
+<div class="hidden items-center gap-2 w-full sm:w-auto justify-between sm:justify-end" id="secretUnlockedContainer">
+<div class="inline-flex items-center gap-1.5 bg-emerald-950/80 border border-emerald-500/60 text-emerald-300 text-xs font-semibold px-3 py-1.5 rounded-lg shadow-xs">
+<i class="fa-solid fa-lock-open text-emerald-400"></i>
+<span>🔓 અનલૉક થયેલ (Edit Mode Active)</span>
+</div>
+<button class="text-xs font-bold bg-rose-700 hover:bg-rose-600 text-white px-3 py-1.5 rounded-lg shadow transition active:scale-95 shrink-0 flex items-center gap-1.5 cursor-pointer" onclick="lockSystemNow()" type="button">
+<i class="fa-solid fa-lock text-[10px]"></i>
+<span>લૉક કરો</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Container -->
+<main class="flex-grow py-5 sm:py-8 px-2 sm:px-4">
+<div class="max-w-[1040px] mx-auto bg-slate-100 rounded-2xl shadow-xl border border-slate-300/80 p-3 sm:p-6 print-shadow-none" id="report-container">
+<!-- Print Only Header -->
+<div class="hidden print-only mb-4 pb-2 border-b-2 border-slate-800 text-center">
+<div class="flex items-center justify-between">
+<div class="text-left">
+<span class="text-xs font-bold text-slate-500 tracking-wider uppercase">YOUNGSTER GROUP • OFFICIAL REPORT</span>
+<h2 class="text-lg font-black text-slate-900">માસિક હિસાબ, બચત અને ધિરાણ વિગત</h2>
+</div>
+<div class="text-right">
+<div class="text-xs text-slate-600">પ્રિન્ટ તારીખ: <span class="font-mono font-bold" id="printReportGeneratedDate"></span></div>
+<div class="text-xs font-bold text-cyan-700" id="printReportCycleBadge">સપ્ટેમ્બર 2026 ચક્ર</div>
+</div>
+</div>
+</div>
+<!-- Hero Header -->
+<section class="mb-4">
+<div class="relative overflow-hidden bg-[#0d1b2e] rounded-xl sm:rounded-2xl px-4 py-5 sm:py-7 text-center shadow-lg border-b-4 border-cyan-400">
+<div class="absolute -top-16 left-1/2 -translate-x-1/2 w-80 h-32 bg-cyan-500/15 blur-3xl pointer-events-none rounded-full"></div>
+<h1 class="text-2xl sm:text-4xl font-extrabold tracking-wider text-[#38bdf8] uppercase drop-shadow-sm font-sans mb-1.5">
+          YOUNGSTER GROUP
+        </h1>
+<p class="text-xs sm:text-base text-slate-300 font-medium tracking-wide">
+          માસિક હિસાબ, બચત અને ધિરાણ વિગતવાર રિપોર્ટ <span class="text-slate-400 font-normal">(Block Edition)</span>
+</p>
+</div>
+</section>
+<!-- Month & Date Cards -->
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+<div class="bg-white rounded-xl py-3 px-4 shadow-sm border border-slate-200/90 flex items-center justify-between border-l-4 border-l-blue-600 transition-card">
+<div class="flex items-center space-x-2.5">
+<span class="text-xl">📅</span>
+<span class="text-slate-700 font-bold text-sm sm:text-base">
+            મહિનો: <span class="text-slate-900 font-extrabold" id="displayMonthText">સપ્ટેમ્બર 2026</span>
+</span>
+</div>
+<span class="text-[11px] font-semibold uppercase bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded" id="monthBadgeIndicator">માસિક ચક્ર</span>
+</div>
+<div class="bg-white rounded-xl py-3 px-4 shadow-sm border border-slate-200/90 flex items-center justify-between border-l-4 border-l-cyan-600 transition-card">
+<div class="flex items-center space-x-2.5">
+<span class="text-xl">📅</span>
+<div class="flex items-center gap-1.5">
+<span class="text-slate-700 font-bold text-sm sm:text-base whitespace-nowrap">તારીખ:</span>
+<span class="text-slate-900 font-extrabold font-mono text-sm sm:text-base bg-cyan-50/70 border border-cyan-200 px-2.5 py-0.5 rounded-lg shadow-2xs" id="displayCycleDate">18/09/2026</span>
+<span class="text-[10px] text-cyan-800 font-medium hidden sm:inline">(આજની તારીખ)</span>
+</div>
+</div>
+<span class="text-[11px] font-semibold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded shrink-0 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          ઓન-રેકોર્ડ
+        </span>
+</div>
+</section>
+<!-- Carry Forward Banner -->
+<div class="hidden mb-4 p-3 rounded-xl bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/15 border border-amber-300 text-amber-900 flex items-center justify-between text-xs sm:text-sm font-semibold shadow-sm" id="carryForwardBanner">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs shadow-xs"><i class="fa-solid fa-arrow-turn-down-right"></i></span>
+<span id="carryForwardBannerText">ગત મહિનાની આખરની કેશ નવી 'કેશ પડેલ રકમ' માં સીધી ઉમેરી દેવામાં આવી છે.</span>
+</div>
+<button class="text-amber-700 hover:text-amber-900 font-bold px-2 py-0.5 rounded text-xs cursor-pointer" onclick="document.getElementById('carryForwardBanner').classList.add('hidden')">✕ બંધ કરો</button>
+</div>
+<!-- KPI Summary Cards -->
+<section class="grid grid-cols-3 gap-2.5 sm:gap-4 mb-5">
+<div class="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm border border-slate-200 border-t-4 border-t-blue-600 transition-card">
+<div class="text-slate-600 font-bold text-xs sm:text-sm mb-1 truncate">કુલ સભ્યો</div>
+<div class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono" id="statTotalMembers">18</div>
+</div>
+<div class="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm border border-slate-200 border-t-4 border-t-emerald-500 transition-card">
+<div class="text-slate-600 font-bold text-xs sm:text-sm mb-1 truncate">જમા સભ્યો</div>
+<div class="text-2xl sm:text-3xl font-extrabold text-emerald-600 font-mono" id="statPaidMembers">18</div>
+<div class="text-[10px] text-slate-400 font-medium -mt-0.5" id="statPaidSubtext">18 / 18 સભ્યો ચૂકવેલ</div>
+</div>
+<div class="bg-white rounded-xl p-3 sm:p-4 text-center shadow-sm border border-slate-200 border-t-4 border-t-red-500 transition-card">
+<div class="text-slate-600 font-bold text-xs sm:text-sm mb-1 truncate">કુલ ધિરાણ સભ્યો</div>
+<div class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono" id="statLoanMembers">11</div>
+<div class="text-[10px] text-slate-400 font-medium -mt-0.5" id="statLoanCountSubtext">11 ધિરાણ ખાતા</div>
+</div>
+</section>
+<!-- Two-Column Main Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 items-start">
+<!-- LEFT COLUMN: Monthly Savings (18 Members) -->
+<section class="lg:col-span-5 flex flex-col">
+<div class="bg-[#1e293b] text-white rounded-xl px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-2 shadow-sm mb-2.5 border-b-2 border-slate-700">
+<div class="flex items-center gap-2">
+<label class="relative flex items-center cursor-pointer select-none">
+<input class="w-4 h-4 rounded text-emerald-500 border-slate-600 bg-slate-800 focus:ring-emerald-400 cursor-pointer" id="masterSavingsCheckbox" onchange="handleProtectedAction(() =&gt; toggleAllSavings(this.checked))" type="checkbox"/>
+</label>
+<h2 class="font-bold text-sm sm:text-base tracking-wide">
+              સભ્યોની માસિક બચત (<span id="savingsCountDisplay">18</span>)
+            </h2>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs cursor-pointer" id="masterSelectAllBtn" onclick="handleProtectedAction(toggleAllSavingsInverse)">
+<i class="fa-solid fa-square-check text-[10px]"></i>
+<span id="selectAllBtnLabel">બધા અનસિલેક્ટ</span>
+</button>
+<span class="text-xs text-cyan-300 font-medium font-mono">₹ ૧,૦૦૦ / માસ</span>
+</div>
+</div>
+<div class="no-print mb-2 p-2 bg-white rounded-xl border border-slate-200/90 shadow-xs flex items-center gap-1.5" id="savingsInlineAddBox">
+<input class="flex-1 text-xs border border-slate-200 rounded-lg px-2.5 py-1.5 font-medium edit-protected-input" id="quickSavingsNameInput" onkeydown="if(event.key==='Enter')handleProtectedAction(addQuickSavingsMember)" placeholder="+ નવો સભ્ય ઉમેરો (નામ)..." type="text"/>
+<button class="text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-1.5 rounded-lg shadow-2xs shrink-0 flex items-center gap-1 edit-protected cursor-pointer" onclick="handleProtectedAction(addQuickSavingsMember)">
+<i class="fa-solid fa-plus text-[10px]"></i>
+<span>ઉમેરો</span>
+</button>
+</div>
+<div class="space-y-1.5" id="savingsListContainer"></div>
+<div class="mt-2.5 p-2.5 bg-white border border-slate-200 rounded-xl flex items-center justify-between text-xs font-semibold text-slate-600 shadow-xs">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>કુલ એકત્રિત બચત:</span>
+</div>
+<span class="text-emerald-700 font-extrabold font-mono text-sm" id="calculatedTotalSavings">₹ 18,000</span>
+</div>
+</section>
+<!-- RIGHT COLUMN: Loans & Financial Summary -->
+<section class="lg:col-span-7 flex flex-col gap-4 sm:gap-5">
+<!-- Borrowers Table -->
+<div>
+<div class="bg-[#ea580c] text-white rounded-xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shadow-sm mb-2.5">
+<div class="flex items-center gap-2">
+<span class="text-base">🤝</span>
+<h2 class="font-bold text-sm sm:text-base tracking-wide">ધિરાણ લેનાર સભ્યોની વિગત (18 સભ્યો)</h2>
+</div>
+<div class="flex items-center flex-wrap gap-2">
+<span class="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-white/20 text-white border border-white/30 font-mono shadow-xs" id="availableCashBadge" title="ઉપલબ્ધ કેશ">
+<i class="fa-solid fa-wallet text-[10px] text-amber-200"></i>
+<span>કેશ: <span class="font-black text-amber-200" id="availableCashAmountDisplay">₹ 30,700</span></span>
+</span>
+<span class="text-xs font-medium bg-orange-700/80 px-2 py-0.5 rounded text-white font-mono">૨% વ્યાજ દર</span>
+<button class="no-print text-[11px] font-bold bg-orange-800 hover:bg-orange-900 text-white px-2.5 py-0.5 rounded-md shadow-2xs flex items-center gap-1 edit-protected cursor-pointer" onclick="requestSecureCarryForward()">
+<i class="fa-solid fa-arrow-right text-[10px]"></i>
+<span>કેરી ફોરવર્ડ</span>
+</button>
+</div>
+</div>
+<!-- Real-Time Rule Notice -->
+<div class="mb-2 px-3 py-1.5 bg-orange-50 border border-orange-200 rounded-xl text-[11px] text-orange-900 flex items-center justify-between">
+<span class="flex items-center gap-1.5">
+<i class="fa-solid fa-bolt text-amber-600 text-xs"></i>
+<span><b>રીઅલ-ટાઇમ ગણતરી:</b> કોઈપણ સભ્યની 'જમા રકમ' લખતાં જ <b>તે સભ્યની બાકી મુદ્દલ</b>, <b>કુલ જમા રકમ</b>, <b>ચોખ્ખી બાકી રકમ</b> અને <b>કેશ પડેલ રકમ</b> તરત જ તે જ સેકન્ડે અપડેટ થઈ જાય છે.</span>
+</span>
+<span class="text-[10px] font-mono text-orange-700 font-bold hidden sm:inline">Auto-Sync Active</span>
+</div>
+<!-- Table Header -->
+<div class="hidden sm:grid grid-cols-12 gap-1 px-3 py-1.5 bg-orange-100/70 border border-orange-200/80 rounded-lg text-[11px] font-bold text-orange-950 mb-1 select-none">
+<div class="col-span-4 flex items-center">ક્રમ / સભ્યનું નામ</div>
+<div class="col-span-2 text-right">મુદ્દલ રકમ</div>
+<div class="col-span-2 text-center">૨% વ્યાજ</div>
+<div class="col-span-2 text-right">જમા રકમ</div>
+<div class="col-span-1 text-right">બાકી મુદ્દલ</div>
+<div class="col-span-1 text-center no-print">ક્રિયા</div>
+</div>
+<!-- Borrower Rows -->
+<div class="space-y-1.5" id="borrowersListContainer"></div>
+<!-- Loan Summary Banner (4 KPI boxes) -->
+<div class="mt-2.5 bg-[#ffedd5] border border-orange-200 rounded-xl p-3 shadow-sm transition-card">
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+<div class="bg-white/80 rounded-lg p-2 border border-orange-200/60 flex flex-col justify-between">
+<div class="text-[10px] sm:text-[11px] font-bold text-orange-900 leading-tight">કુલ ધિરાણ (મુદ્દલ)</div>
+<div class="text-xs sm:text-sm font-black font-mono text-orange-800 mt-0.5" id="displayTotalLoanAmount">₹ 3,51,000</div>
+</div>
+<div class="bg-white/90 rounded-lg p-2 border border-blue-200/80 flex flex-col justify-between relative shadow-2xs">
+<div>
+<div class="text-[10px] sm:text-[11px] font-bold text-blue-900 leading-tight">કુલ ૨% વ્યાજ આવક</div>
+<div class="text-xs sm:text-sm font-black font-mono text-blue-700 mt-0.5" id="displayTotalInterestAmount">₹ 7,020</div>
+</div>
+<div class="mt-1.5 pt-1 border-t border-blue-100" id="interestActionWrapper">
+<button class="w-full text-[10px] sm:text-[11px] font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white py-1 px-1.5 rounded-md shadow-2xs transition active:scale-95 cursor-pointer flex items-center justify-center gap-1 edit-protected" id="collectInterestBtn" onclick="handleProtectedAction(collectInterestToCash)" style="display: none;">
+<i class="fa-solid fa-plus-circle text-[10px]"></i>
+<span>➕ કેશમાં ઉમેરો</span>
+</button>
+<div class="items-center justify-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-300 py-1 px-1.5 rounded-md inline-flex" id="interestCollectedBadge">
+<i class="fa-solid fa-circle-check text-emerald-600 text-[10px]"></i>
+<span>✅ કેશમાં જમા થયેલ</span>
+</div>
+</div>
+</div>
+<!-- Total Jama Card (કુલ જમા રકમ) -->
+<div class="bg-white/80 rounded-lg p-2 border border-emerald-200/60 flex flex-col justify-between ring-1 ring-emerald-300">
+<div class="text-[10px] sm:text-[11px] font-bold text-emerald-900 leading-tight">કુલ જમા રકમ</div>
+<div class="text-xs sm:text-sm font-black font-mono text-emerald-700 mt-0.5" id="displayTotalJamaAmount">₹ 0</div>
+</div>
+<!-- Net Remaining Loan Card (ચોખ્ખી બાકી રકમ) -->
+<div class="bg-white/80 rounded-lg p-2 border border-rose-200/60 flex flex-col justify-between ring-1 ring-rose-300">
+<div class="text-[10px] sm:text-[11px] font-bold text-rose-900 leading-tight">ચોખ્ખી બાકી રકમ</div>
+<div class="text-xs sm:text-sm font-black font-mono text-rose-700 mt-0.5" id="displayNetRemainingAmount">₹ 3,51,000</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Overall Financial Status -->
+<div>
+<div class="bg-[#1e293b] text-white rounded-xl px-4 py-2.5 flex items-center justify-between shadow-sm mb-2.5">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded border-2 border-emerald-400 inline-block bg-slate-800"></span>
+<h2 class="font-bold text-sm sm:text-base tracking-wide">કુલ નાણાકીય સ્થિતિ</h2>
+</div>
+<span class="text-xs text-slate-300">ઓડિટેડ બેલેન્સ</span>
+</div>
+<div class="space-y-1.5 font-medium text-xs sm:text-sm">
+<!-- Row 1: Total Distributed Loan / Net Outstanding Loan -->
+<div class="bg-white rounded-xl px-3.5 py-2.5 border border-orange-200/90 shadow-sm flex items-center justify-between transition-card bg-orange-50/20">
+<div class="flex items-center space-x-2">
+<span class="text-sm">🤝</span>
+<div>
+<span class="text-slate-800 font-semibold block">કુલ ધિરાણ રકમ (ચોખ્ખી બાકી રકમ)</span>
+<span class="text-[10px] text-orange-700/90 font-normal block sm:inline">(કુલ મુદ્દલ માંથી કુલ જમા બાદ થતાં બાકી રકમ)</span>
+</div>
+</div>
+<div class="font-bold text-orange-700 font-mono text-sm sm:text-base" id="statRowLoanAmount">₹ 3,51,000</div>
+</div>
+<!-- Row 2: Party Expense -->
+<div class="bg-white rounded-xl px-3.5 py-2 border border-purple-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 transition-card bg-purple-50/20">
+<div class="flex items-center space-x-2">
+<span class="text-sm">🎉</span>
+<div>
+<span class="text-purple-900 font-semibold block">કુલ પાર્ટી ખર્ચ (Party Expense)</span>
+<span class="text-[10px] text-purple-700/80 font-normal block" id="partyExpenseCashLimitBadge">
+                    (કેશ પડેલ રકમમાંથી બાદ થાય છે • ઉપલબ્ધ કેશ: <span class="font-bold font-mono text-purple-900" id="partyMaxAvailableCashText">₹ 30,700</span>)
+                  </span>
+</div>
+</div>
+<div class="flex items-center justify-end space-x-1">
+<span class="font-bold text-purple-700 font-mono text-sm sm:text-base">₹</span>
+<input class="w-24 sm:w-28 text-right font-bold text-purple-700 font-mono text-sm sm:text-base bg-transparent border-0 border-b border-dashed border-purple-300 focus:border-purple-600 focus:ring-0 p-0.5 print-input-display edit-protected-input" disabled="" id="partyKharchGlobalInput" min="0" oninput="updateGlobalPartyKharch(this.value, this)" readonly="" step="50" type="number" value="0"/>
+</div>
+</div>
+<!-- Row 3: Post Office -->
+<div class="bg-white rounded-xl px-3.5 py-2.5 border border-slate-200/90 shadow-sm flex items-center justify-between transition-card">
+<div class="flex items-center space-x-2">
+<span class="text-sm">🏦</span>
+<span class="text-slate-800 font-semibold">પોસ્ટ ઓફિસમાં રકમ</span>
+</div>
+<div class="flex items-center space-x-1">
+<span class="font-bold text-slate-700 font-mono text-sm sm:text-base">₹</span>
+<input class="w-28 sm:w-32 text-right font-bold text-slate-900 font-mono text-sm sm:text-base bg-transparent border-0 border-b border-dashed border-slate-300 focus:border-cyan-600 focus:ring-0 p-0.5 print-input-display edit-protected-input" disabled="" id="postOfficeGlobalInput" min="0" oninput="updateGlobalPostOffice(this.value)" readonly="" step="500" type="number" value="310000"/>
+</div>
+</div>
+<!-- Row 4: Cash in Hand -->
+<div class="bg-white rounded-xl px-3.5 py-2.5 border border-slate-200/90 shadow-sm flex items-center justify-between transition-card">
+<div class="flex items-center space-x-2">
+<span class="text-sm">💵</span>
+<div>
+<span class="text-slate-800 font-semibold block">કેશ પડેલ રકમ</span>
+<span class="text-[10px] text-emerald-600 font-normal block sm:inline" id="cashCalculationSubtextBadge">
+                    (બેઝ કેશ ₹ 30,700 + કુલ જમા રકમ - પાર્ટી ખર્ચ)
+                  </span>
+</div>
+</div>
+<div class="flex items-center space-x-1">
+<span class="font-bold text-slate-700 font-mono text-sm sm:text-base">₹</span>
+<input class="w-24 sm:w-28 text-right font-bold text-slate-900 font-mono text-sm sm:text-base bg-transparent border-0 border-b border-dashed border-slate-300 focus:border-cyan-600 focus:ring-0 p-0.5 print-input-display edit-protected-input" disabled="" id="cashInHandGlobalInput" min="0" oninput="updateGlobalBaseCash(this.value)" readonly="" step="100" type="number" value="30700"/>
+</div>
+</div>
+</div>
+<!-- Grand Balance Card -->
+<div class="mt-3 bg-[#066442] hover:bg-[#055739] text-white rounded-xl p-3.5 sm:p-4 flex items-center justify-between shadow-md transition duration-200">
+<div>
+<span class="text-base sm:text-lg font-bold tracking-wide block">કુલ બેલેન્સ:</span>
+<span class="text-[10px] text-emerald-200/90 block font-sans">ચોખ્ખી બાકી ધિરાણ + પોસ્ટ ઓફિસ + કેશ પડેલ રકમ</span>
+</div>
+<span class="text-2xl sm:text-3xl font-extrabold font-mono tracking-tight text-white drop-shadow" id="grandBalanceDisplay">₹ 6,91,700</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Note -->
+<footer class="mt-6 pt-4 border-t border-slate-200 text-center">
+<p class="text-[11px] sm:text-xs text-slate-500 font-normal leading-relaxed">
+        તમામ સભ્યોની જાણ માટે આ મોડર્ન બ્લોક ફોર્મેટમાં બચત અને ધિરાણનો સંપૂર્ણ હિસાબ પ્રકાશિત કરવામાં આવ્યો છે. — <span class="font-semibold text-slate-700">Youngster Group</span>
+</p>
+</footer>
+</div>
+</main>
+<!-- Floating Save Bar -->
+<div class="no-print fixed bottom-3 inset-x-0 z-40 flex justify-center px-4 pointer-events-none" id="floatingSaveBar">
+<div class="pointer-events-auto bg-slate-900/95 backdrop-blur-md text-white border-2 border-emerald-500/80 shadow-2xl rounded-2xl px-4 py-2.5 flex items-center gap-3 sm:gap-4 ring-4 ring-slate-900/30">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+<span class="text-xs font-semibold hidden sm:inline text-slate-200">LocalStorage કાયમી સંગ્રહ:</span>
+<span class="text-xs font-semibold sm:hidden text-slate-200">ડેટા સેવ કરો:</span>
+</div>
+<button class="bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-xs sm:text-sm px-4 py-2 rounded-xl shadow-lg transition active:scale-95 flex items-center gap-2 cursor-pointer ring-1 ring-emerald-300" onclick="handleExplicitSaveData()">
+<i class="fa-solid fa-floppy-disk text-sm text-emerald-100"></i>
+<span>💾 ડેટા સેવ કરો (Save Data)</span>
+</button>
+<button class="bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs sm:text-sm px-3.5 py-2 rounded-xl shadow-lg transition active:scale-95 flex items-center gap-1.5 cursor-pointer" onclick="exportJSONData()">
+<i class="fa-solid fa-code text-sm"></i>
+<span>JSON એક્સપોર્ટ</span>
+</button>
+<button class="bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xs sm:text-sm px-3.5 py-2 rounded-xl shadow-lg transition active:scale-95 flex items-center gap-1.5 cursor-pointer ring-1 ring-sky-300" onclick="openImportModalOrTriggerFile()">
+<i class="fa-solid fa-file-import text-sm"></i>
+<span>📥 ડેટા ઈમ્પોર્ટ</span>
+</button>
+<button class="text-slate-400 hover:text-white text-xs px-2 py-1 rounded-lg transition" onclick="document.getElementById('floatingSaveBar').classList.add('hidden')" title="છુપાવો">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+</div>
+<!-- Security Confirmation Modal -->
+<div class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs hidden flex items-center justify-center p-4" id="securityConfirmModal">
+<div class="bg-white rounded-2xl max-w-md w-full shadow-2xl overflow-hidden border border-slate-200">
+<div class="bg-slate-900 text-white px-5 py-4 flex items-center justify-between border-b border-slate-800">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-base shrink-0">
+<i class="fa-solid fa-lock"></i>
+</div>
+<h3 class="font-bold text-base" id="securityModalTitle">સિક્યોરિટી ચકાસણી</h3>
+</div>
+<button class="text-slate-400 hover:text-white text-xl cursor-pointer" onclick="closeSecurityModal()" type="button">×</button>
+</div>
+<div class="p-5 space-y-4">
+<div class="flex items-start gap-3 bg-amber-50 border border-amber-200 p-3 rounded-xl">
+<i class="fa-solid fa-triangle-exclamation text-amber-600 text-lg mt-0.5"></i>
+<p class="text-xs text-amber-900 font-medium leading-relaxed" id="securityModalDesc">ભૂલથી ક્લિક ન થાય તે માટે સિક્રેટ કોડ જરૂરી છે.</p>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">સિક્રેટ કોડ (Secret Code)</label>
+<div class="relative">
+<i class="fa-solid fa-key absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+<input class="w-full text-xs font-mono bg-slate-50 border border-slate-300 rounded-lg pl-8 pr-2.5 py-2 text-slate-900 focus:ring-2 focus:ring-amber-400 focus:outline-none" id="securityModalCodeInput" placeholder="કોડ 1234 દાખલ કરો..." type="password"/>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">ડિફોલ્ટ એડમિન કોડ: 1234</p>
+</div>
+<div class="pt-3 border-t border-slate-100 flex justify-end gap-2">
+<button class="px-4 py-2 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-100 transition cursor-pointer" onclick="closeSecurityModal()" type="button">રદ કરો</button>
+<button class="px-5 py-2 text-xs font-bold rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white shadow transition active:scale-95 cursor-pointer" id="securityModalConfirmBtn" onclick="executePendingSecurityAction()" type="button">કન્ફર્મ કરો</button>
+</div>
+</div>
+</div>
+</div>
+<!-- JSON Backup Export Modal -->
+<div class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs hidden flex items-center justify-center p-4" id="jsonBackupModal">
+<div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] shadow-2xl flex flex-col overflow-hidden border border-slate-200">
+<div class="bg-slate-900 text-white px-5 py-4 flex items-center justify-between border-b border-slate-800">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-base shrink-0">
+<i class="fa-solid fa-code"></i>
+</div>
+<div>
+<h3 class="font-bold text-base leading-tight">JSON બેકઅપ ડેટા (Export Backup)</h3>
+<p class="text-xs text-slate-400">Youngster Group સંપૂર્ણ હિસાબ ડેટા</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-white text-xl cursor-pointer" onclick="document.getElementById('jsonBackupModal').classList.add('hidden')" type="button">×</button>
+</div>
+<div class="p-4 sm:p-5 space-y-3 overflow-y-auto">
+<div class="bg-emerald-50 border border-emerald-300 p-3 rounded-xl flex items-start gap-2.5 text-xs text-emerald-900">
+<i class="fa-solid fa-circle-check text-emerald-600 text-sm mt-0.5"></i>
+<p class="font-medium leading-relaxed">✅ JSON બેકઅપ ડેટા તૈયાર છે! આ કોડ સાચવીને ગમે ત્યારે ઈમ્પોર્ટ કરી શકો છો.</p>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">બેકઅપ ડેટા (JSON Text):</label>
+<textarea class="w-full h-56 p-3 text-xs font-mono bg-slate-900 text-cyan-300 rounded-xl border border-slate-700" id="jsonBackupTextarea" readonly=""></textarea>
+</div>
+</div>
+<div class="bg-slate-100 px-5 py-3 border-t border-slate-200 flex items-center justify-between gap-2">
+<button class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs cursor-pointer flex items-center gap-1.5" onclick="copyJSONTextareaContent()" type="button">
+<i class="fa-solid fa-copy"></i>
+<span>ડેટા કોપી કરો (Copy)</span>
+</button>
+<button class="px-4 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 text-white hover:bg-slate-700 cursor-pointer" onclick="document.getElementById('jsonBackupModal').classList.add('hidden')" type="button">બંધ કરો</button>
+</div>
+</div>
+</div>
+<!-- JSON Import Modal -->
+<div class="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-xs hidden flex items-center justify-center p-4" id="jsonImportModal">
+<div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] shadow-2xl flex flex-col overflow-hidden border border-slate-200">
+<div class="bg-slate-900 text-white px-5 py-4 flex items-center justify-between border-b border-slate-800">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-400 text-base shrink-0">
+<i class="fa-solid fa-file-import"></i>
+</div>
+<div>
+<h3 class="font-bold text-base leading-tight">JSON ડેટા ઈમ્પોર્ટ (Import Ledger Data)</h3>
+<p class="text-xs text-slate-400">બેકઅપ ફાઇલ અપલોડ કરો અથવા JSON પેસ્ટ કરો</p>
+</div>
+</div>
+<button class="text-slate-400 hover:text-white text-xl cursor-pointer" onclick="document.getElementById('jsonImportModal').classList.add('hidden')" type="button">×</button>
+</div>
+<div class="p-4 sm:p-5 space-y-4 overflow-y-auto">
+<div class="border-2 border-dashed border-sky-300 hover:border-sky-500 bg-sky-50/50 rounded-xl p-4 text-center cursor-pointer transition" onclick="document.getElementById('importFileInput').click()">
+<i class="fa-solid fa-cloud-arrow-up text-2xl text-sky-600 mb-1"></i>
+<p class="text-xs font-bold text-slate-700">JSON ફાઈલ પસંદ કરો અથવા અહીં ખેંચો</p>
+<p class="text-[10px] text-slate-500">(.json ફોર્મેટ સપોર્ટેડ)</p>
+<input accept=".json,application/json" class="hidden" id="importFileInput" onchange="handleImportFileSelected(event)" type="file"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">અથવા JSON કોડ અહીં પેસ્ટ કરો:</label>
+<textarea class="w-full h-40 p-3 text-xs font-mono bg-slate-900 text-cyan-300 rounded-xl border border-slate-700" id="jsonImportTextarea" placeholder='{ "savingsMembers": [...], "borrowers": [...] }'></textarea>
+</div>
+</div>
+<div class="bg-slate-100 px-5 py-3 border-t border-slate-200 flex items-center justify-between gap-2">
+<button class="px-4 py-2 text-xs font-semibold rounded-lg text-slate-600 hover:bg-slate-200 cursor-pointer" onclick="document.getElementById('jsonImportModal').classList.add('hidden')" type="button">રદ કરો</button>
+<button class="px-4 py-2 text-xs font-bold rounded-lg bg-sky-600 hover:bg-sky-500 text-white shadow transition active:scale-95 cursor-pointer flex items-center gap-1.5" onclick="executeJSONImport()" type="button">
+<i class="fa-solid fa-check"></i>
+<span>ડેટા ઈમ્પોર્ટ કરો (Apply Import)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Core JavaScript Logic -->
+<script data-purpose="app-logic">
+  const gujaratiMonths = [
+    "જાન્યુઆરી", "ફેબ્રુઆરી", "માર્ચ", "એપ્રિલ", 
+    "મે", "જૂન", "જુલાઈ", "ઓગસ્ટ", 
+    "સપ્ટેમ્બર", "ઓક્ટોબર", "નવેમ્બર", "ડિસેમ્બર"
+  ];
+
+  let isSystemUnlocked = false;
+  const VALID_SECRET_CODES = ["1234", "YG2026", "youngster", "2026", "admin"];
+
+  const DEFAULT_SAVINGS_MEMBERS = [
+    { id: 1, name: "પ્રીતેશ", amount: 1000, paid: true },
+    { id: 2, name: "રવિ", amount: 1000, paid: true },
+    { id: 3, name: "હિતેશ કે", amount: 1000, paid: true },
+    { id: 4, name: "નરેશભાઈ કાંતિભાઈ", amount: 1000, paid: true },
+    { id: 5, name: "હિતેશ એ", amount: 1000, paid: true },
+    { id: 6, name: "મનીષ", amount: 1000, paid: true },
+    { id: 7, name: "રાકેશભાઈ", amount: 1000, paid: true },
+    { id: 8, name: "નરેશભાઈ કાલિદાસ", amount: 1000, paid: true },
+    { id: 9, name: "આકાશ", amount: 1000, paid: true },
+    { id: 10, name: "સંદીપ", amount: 1000, paid: true },
+    { id: 11, name: "અક્ષય", amount: 1000, paid: true },
+    { id: 12, name: "જીગર", amount: 1000, paid: true },
+    { id: 13, name: "ચિરાગ", amount: 1000, paid: true },
+    { id: 14, name: "રિતેશ", amount: 1000, paid: true },
+    { id: 15, name: "સુરેશભાઈ", amount: 1000, paid: true },
+    { id: 16, name: "નિકુંજ", amount: 1000, paid: true },
+    { id: 17, name: "કિશન", amount: 1000, paid: true },
+    { id: 18, name: "શૈલેષભાઈ", amount: 1000, paid: true }
+  ];
+
+  const DEFAULT_BORROWERS = [
+    { id: 1, name: "નિકુંજ", amount: 50000, jama: 0, carryForwarded: false },
+    { id: 2, name: "આકાશ", amount: 47000, jama: 0, carryForwarded: false },
+    { id: 3, name: "શૈલેષભાઈ", amount: 45000, jama: 0, carryForwarded: false },
+    { id: 4, name: "અક્ષય", amount: 44000, jama: 0, carryForwarded: false },
+    { id: 5, name: "કિશન", amount: 44000, jama: 0, carryForwarded: false },
+    { id: 6, name: "નરેશભાઈ કાલિદાસ", amount: 40000, jama: 0, carryForwarded: false },
+    { id: 7, name: "રાકેશભાઈ", amount: 38000, jama: 0, carryForwarded: false },
+    { id: 8, name: "મનિષ", amount: 23000, jama: 0, carryForwarded: false },
+    { id: 9, name: "નરેશભાઈ કાંતિલાલ", amount: 12000, jama: 0, carryForwarded: false },
+    { id: 10, name: "પ્રીતેશ", amount: 5000, jama: 0, carryForwarded: false },
+    { id: 11, name: "હિતેશ કે", amount: 3000, jama: 0, carryForwarded: false },
+    { id: 12, name: "રવિ", amount: 0, jama: 0, carryForwarded: false },
+    { id: 13, name: "હિતેશ એ", amount: 0, jama: 0, carryForwarded: false },
+    { id: 14, name: "સંદીપ", amount: 0, jama: 0, carryForwarded: false },
+    { id: 15, name: "જીગર", amount: 0, jama: 0, carryForwarded: false },
+    { id: 16, name: "ચિરાગ", amount: 0, jama: 0, carryForwarded: false },
+    { id: 17, name: "રિતેશ", amount: 0, jama: 0, carryForwarded: false },
+    { id: 18, name: "સુરેશભાઈ", amount: 0, jama: 0, carryForwarded: false }
+  ];
+
+  const MASTER_STORAGE_KEY = 'youngster_group_ledger_master_v1';
+  const LEGACY_STORAGE_KEY = 'youngster_group_saved_ledger_state';
+
+  let savingsMembers = [...DEFAULT_SAVINGS_MEMBERS];
+  let borrowers = [...DEFAULT_BORROWERS];
+  let baseCash = 30700;
+  let globalPartyKharch = 0;
+  let postOffice = 310000;
+  let selectedMonth = 8;
+  let selectedYear = 2026;
+  let isInterestCollected = true;
+  let monthLedgersStore = {};
+  let previousMonthSnapshot = null;
+
+  function formatINR(val) {
+    return new Intl.NumberFormat('en-IN').format(Math.round(val || 0));
+  }
+
+  function padZero(num) {
+    return num < 10 ? '0' + num : num;
+  }
+
+  function getRealTimeFormattedDate() {
+    const now = new Date();
+    const d = padZero(now.getDate());
+    const m = padZero(now.getMonth() + 1);
+    const y = now.getFullYear();
+    return `${d}/${m}/${y}`;
+  }
+
+  function syncRealTimeDateDisplay() {
+    const displayDateEl = document.getElementById('displayCycleDate');
+    if (displayDateEl) {
+      displayDateEl.innerText = getRealTimeFormattedDate();
+    }
+  }
+
+  function calculateTotalInterest() {
+    return borrowers.reduce((sum, curr) => sum + ((Number(curr.amount) || 0) * 0.02), 0);
+  }
+
+  function calculateTotalSavings() {
+    return savingsMembers
+      .filter(m => m.paid)
+      .reduce((sum, curr) => sum + (Number(curr.amount) || 0), 0);
+  }
+
+  function calculateTotalJama() {
+    return borrowers.reduce((sum, curr) => sum + (Number(curr.jama) || 0), 0);
+  }
+
+  function calculateTotalLoanPrincipal() {
+    return borrowers.reduce((sum, curr) => sum + (Number(curr.amount) || 0), 0);
+  }
+
+  function getCalculatedCashInHand() {
+    const totalJama = calculateTotalJama();
+    return Math.max(0, baseCash + totalJama - globalPartyKharch);
+  }
+
+  function showToast(msg, isSuccess = false) {
+    const toast = document.getElementById('toastNotification');
+    const toastMsg = document.getElementById('toastMessage');
+    const toastIcon = document.getElementById('toastIcon');
+    if (toast && toastMsg) {
+      toastMsg.innerText = msg;
+      if (isSuccess) {
+        toast.className = "fixed top-5 right-5 z-50 transform transition-all duration-300 translate-y-0 opacity-100 bg-emerald-900 border border-emerald-500 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-semibold";
+        if (toastIcon) toastIcon.className = "fa-solid fa-circle-check text-emerald-300 text-sm";
+      } else {
+        toast.className = "fixed top-5 right-5 z-50 transform transition-all duration-300 translate-y-0 opacity-100 bg-rose-900 border border-rose-600 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-semibold";
+        if (toastIcon) toastIcon.className = "fa-solid fa-triangle-exclamation text-amber-300 text-sm";
+      }
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-[-120%]', 'opacity-0');
+      }, 3500);
+    }
+  }
+
+  function checkIsUnlocked() {
+    if (!isSystemUnlocked) {
+      showToast("🔒 એડિટ કરવા માટે પહેલાં સિક્રેટ કોડ (1234) દાખલ કરી અનલૉક કરો!");
+      return false;
+    }
+    return true;
+  }
+
+  function handleProtectedAction(fn) {
+    if (!checkIsUnlocked()) return;
+    if (typeof fn === 'function') fn();
+  }
+
+  function getCycleKey(year = selectedYear, month = selectedMonth) {
+    return `${year}-${padZero(month + 1)}`;
+  }
+
+  function saveStateToLocalStorage() {
+    try {
+      const currentKey = getCycleKey();
+      monthLedgersStore[currentKey] = {
+        savingsMembers: JSON.parse(JSON.stringify(savingsMembers)),
+        borrowers: JSON.parse(JSON.stringify(borrowers)),
+        baseCash,
+        globalPartyKharch,
+        postOffice,
+        isInterestCollected
+      };
+
+      const totalLoans = calculateTotalLoanPrincipal();
+      const totalJama = calculateTotalJama();
+      const netLoans = Math.max(0, totalLoans - totalJama);
+      const dynamicCashInHand = getCalculatedCashInHand();
+      const grandBalance = netLoans + postOffice + dynamicCashInHand;
+
+      const masterPayload = {
+        savingsMembers: JSON.parse(JSON.stringify(savingsMembers)),
+        borrowers: JSON.parse(JSON.stringify(borrowers)),
+        baseCash,
+        globalPartyKharch,
+        postOffice,
+        calculatedCashInHand: dynamicCashInHand,
+        grandBalance,
+        isInterestCollected,
+        selectedMonth,
+        selectedYear,
+        cycleDate: getRealTimeFormattedDate(),
+        monthLedgersStore,
+        previousMonthSnapshot,
+        savedAt: new Date().toISOString(),
+        isExplicitlySaved: true,
+        timestamp: Date.now()
+      };
+
+      const serialized = JSON.stringify(masterPayload);
+      localStorage.setItem(MASTER_STORAGE_KEY, serialized);
+      localStorage.setItem(LEGACY_STORAGE_KEY, serialized);
+    } catch (err) {
+      console.warn("Save warning:", err);
+    }
+  }
+
+  function handleExplicitSaveData() {
+    if (!isSystemUnlocked) {
+      const pass = prompt("🔒 ડેટા સેવ કરવા માટે એડમિન સિક્રેટ કોડ (1234) દાખલ કરો:");
+      if (pass === null) return;
+      if (!VALID_SECRET_CODES.includes(pass.trim())) {
+        showToast("❌ ખોટો સિક્રેટ કોડ!");
+        return;
+      }
+      const passInput = document.getElementById('secretPasscode');
+      if (passInput) passInput.value = pass.trim();
+      verifySecretCode();
+    }
+
+    saveStateToLocalStorage();
+    const btnText = document.getElementById('headerSaveBtnText');
+    const btnIcon = document.getElementById('headerSaveBtnIcon');
+    if (btnText && btnIcon) {
+      const oldText = btnText.innerText;
+      btnText.innerText = "✅ સેવ થઈ ગયો!";
+      btnIcon.className = "fa-solid fa-circle-check text-white text-[12px]";
+      setTimeout(() => {
+        btnText.innerText = oldText;
+        btnIcon.className = "fa-solid fa-floppy-disk text-[12px] text-emerald-100";
+      }, 2500);
+    }
+    showToast("✅ તમામ હિસાબ LocalStorage માં કાયમી સેવ થઈ ગયો છે!", true);
+  }
+
+  function loadStateFromLocalStorage() {
+    try {
+      let raw = localStorage.getItem(MASTER_STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
+      if (!raw) return false;
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return false;
+
+      if (Array.isArray(parsed.savingsMembers) && parsed.savingsMembers.length > 0) {
+        savingsMembers = parsed.savingsMembers;
+      }
+      if (Array.isArray(parsed.borrowers) && parsed.borrowers.length > 0) {
+        borrowers = parsed.borrowers;
+      }
+      if (typeof parsed.baseCash === 'number') {
+        baseCash = parsed.baseCash;
+      } else if (typeof parsed.openingCashInHand === 'number' && parsed.openingCashInHand === 30700) {
+        baseCash = 30700;
+      }
+      if (typeof parsed.globalPartyKharch === 'number') globalPartyKharch = parsed.globalPartyKharch;
+      if (typeof parsed.postOffice === 'number') postOffice = parsed.postOffice;
+      if (typeof parsed.isInterestCollected === 'boolean') isInterestCollected = parsed.isInterestCollected;
+      if (typeof parsed.selectedMonth === 'number') selectedMonth = parsed.selectedMonth;
+      if (parsed.selectedYear) selectedYear = parsed.selectedYear;
+      if (parsed.monthLedgersStore) monthLedgersStore = parsed.monthLedgersStore;
+      if (parsed.previousMonthSnapshot) previousMonthSnapshot = parsed.previousMonthSnapshot;
+
+      return true;
+    } catch (err) {
+      console.warn("Load warning:", err);
+      return false;
+    }
+  }
+
+  function resetToDefaults() {
+    const confirmReset = confirm("શું તમે મૂળભૂત બેઝલાઇન ડેટા રીસેટ કરવા માંગો છો?");
+    if (!confirmReset) return;
+
+    savingsMembers = JSON.parse(JSON.stringify(DEFAULT_SAVINGS_MEMBERS));
+    borrowers = JSON.parse(JSON.stringify(DEFAULT_BORROWERS));
+    baseCash = 30700;
+    globalPartyKharch = 0;
+    postOffice = 310000;
+    isInterestCollected = true;
+    selectedMonth = 8;
+    selectedYear = 2026;
+
+    onPeriodChange();
+    saveStateToLocalStorage();
+    showToast("🔄 મૂળભૂત બેઝલાઇન ડેટા રીસેટ થયો છે!", true);
+  }
+
+  function verifySecretCode() {
+    const inputEl = document.getElementById('secretPasscode');
+    const code = inputEl ? inputEl.value.trim() : '';
+
+    if (VALID_SECRET_CODES.includes(code)) {
+      isSystemUnlocked = true;
+      document.body.classList.remove('locked-mode');
+
+      document.getElementById('secretInputContainer').classList.add('hidden');
+      document.getElementById('secretUnlockedContainer').classList.remove('hidden');
+      document.getElementById('secretUnlockedContainer').classList.add('flex');
+
+      const iconBox = document.getElementById('lockIconBox');
+      if (iconBox) {
+        iconBox.className = "w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 text-lg shrink-0";
+        document.getElementById('mainLockIcon').className = "fa-solid fa-lock-open";
+      }
+      const bannerBox = document.getElementById('securityBannerBox');
+      if (bannerBox) {
+        bannerBox.className = "bg-gradient-to-r from-slate-900 via-[#102a20] to-slate-900 border-2 border-emerald-500/60 rounded-2xl p-3 sm:p-4 shadow-lg flex flex-col md:flex-row items-center justify-between gap-3 text-white transition-all duration-200";
+      }
+      const notice = document.getElementById('lockNoticeDesc');
+      if (notice) {
+        notice.innerText = "અધિકાર સક્રિય છે! હવે તમે સભ્યો, ધિરાણ, વ્યાજ, પાર્ટી ખર્ચ અને કેરી ફોરવર્ડ બદલી શકો છો.";
+      }
+
+      ['partyKharchGlobalInput', 'postOfficeGlobalInput', 'cashInHandGlobalInput'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.removeAttribute('readonly');
+          el.removeAttribute('disabled');
+        }
+      });
+
+      renderSavings();
+      renderBorrowers();
+      showToast("🔓 સિસ્ટમ સફળતાપૂર્વક અનલૉક થઈ ગઈ છે (Edit Mode Active)", true);
+    } else {
+      showToast("❌ ખોટો સિક્રેટ કોડ! ડિફોલ્ટ કોડ '1234' દાખલ કરો.");
+    }
+  }
+
+  function lockSystemNow() {
+    isSystemUnlocked = false;
+    document.body.classList.add('locked-mode');
+
+    document.getElementById('secretInputContainer').classList.remove('hidden');
+    document.getElementById('secretUnlockedContainer').classList.add('hidden');
+    document.getElementById('secretUnlockedContainer').classList.remove('flex');
+
+    const iconBox = document.getElementById('lockIconBox');
+    if (iconBox) {
+      iconBox.className = "w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-lg shrink-0";
+      document.getElementById('mainLockIcon').className = "fa-solid fa-lock";
+    }
+    const bannerBox = document.getElementById('securityBannerBox');
+    if (bannerBox) {
+      bannerBox.className = "bg-gradient-to-r from-slate-900 via-[#132238] to-slate-900 border-2 border-amber-500/60 rounded-2xl p-3 sm:p-4 shadow-lg flex flex-col md:flex-row items-center justify-between gap-3 text-white transition-all duration-200";
+    }
+
+    ['partyKharchGlobalInput', 'postOfficeGlobalInput', 'cashInHandGlobalInput'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.setAttribute('readonly', 'true');
+        el.setAttribute('disabled', 'true');
+      }
+    });
+
+    renderSavings();
+    renderBorrowers();
+    showToast("🔒 સિસ્ટમ ફરીથી લૉક થઈ ગઈ છે");
+  }
+
+  function collectInterestToCash() {
+    if (!checkIsUnlocked()) return;
+    if (isInterestCollected) {
+      showToast("આ મહિનાની ૨% વ્યાજ આવક પહેલેથી જ કેશમાં જમા થયેલ છે!");
+      return;
+    }
+    isInterestCollected = true;
+    updateCalculations();
+    saveStateToLocalStorage();
+    showToast(`✅ ૨% વ્યાજ આવક સફળતાપૂર્વક કેશમાં ઉમેરાઈ ગઈ!`, true);
+  }
+
+  function updateInterestActionUI() {
+    const btn = document.getElementById('collectInterestBtn');
+    const badge = document.getElementById('interestCollectedBadge');
+    if (!btn || !badge) return;
+
+    if (isInterestCollected) {
+      btn.style.display = 'none';
+      badge.classList.remove('hidden');
+      badge.classList.add('inline-flex');
+    } else {
+      btn.style.display = 'flex';
+      badge.classList.add('hidden');
+      badge.classList.remove('inline-flex');
+    }
+  }
+
+  function onPeriodChange() {
+    const monthName = gujaratiMonths[selectedMonth];
+    const displayMonthText = document.getElementById('displayMonthText');
+    if (displayMonthText) {
+      displayMonthText.innerText = `${monthName} ${selectedYear}`;
+    }
+
+    syncRealTimeDateDisplay();
+    renderSavings();
+    renderBorrowers();
+    updateCalculations();
+  }
+
+  function updateGlobalPartyKharch(val, inputEl) {
+    if (!checkIsUnlocked()) return;
+    const parsed = Math.max(0, parseFloat(val) || 0);
+    const maxAvailableCash = baseCash + calculateTotalJama();
+
+    if (parsed > maxAvailableCash) {
+      showToast(`❌ પાર્ટી ખર્ચ ઉપલબ્ધ કેશ (₹ ${formatINR(maxAvailableCash)}) કરતાં વધુ ન હોઈ શકે!`);
+      globalPartyKharch = maxAvailableCash;
+      if (inputEl) inputEl.value = globalPartyKharch;
+    } else {
+      globalPartyKharch = parsed;
+    }
+
+    updateCalculations();
+    saveStateToLocalStorage();
+  }
+
+  function updateGlobalPostOffice(val) {
+    if (!checkIsUnlocked()) return;
+    postOffice = Math.max(0, parseFloat(val) || 0);
+    updateCalculations();
+    saveStateToLocalStorage();
+  }
+
+  function updateGlobalBaseCash(val) {
+    if (!checkIsUnlocked()) return;
+    const targetNetCash = Math.max(0, parseFloat(val) || 0);
+    const totalJama = calculateTotalJama();
+    baseCash = Math.max(0, targetNetCash + globalPartyKharch - totalJama);
+    updateCalculations();
+    saveStateToLocalStorage();
+  }
+
+  function toggleAllSavings(checkState) {
+    if (!checkIsUnlocked()) return;
+    savingsMembers = savingsMembers.map(m => ({ ...m, paid: Boolean(checkState) }));
+    renderSavings();
+    saveStateToLocalStorage();
+    showToast(checkState ? "✅ બધા સભ્યો સિલેક્ટ (જમા) થયા!" : "⚠️ બધા સભ્યો અનસિલેક્ટ થયા!");
+  }
+
+  function toggleAllSavingsInverse() {
+    if (!checkIsUnlocked()) return;
+    const anyUnpaid = savingsMembers.some(m => !m.paid);
+    toggleAllSavings(anyUnpaid);
+  }
+
+  function requestSecureCarryForward() {
+    if (!isSystemUnlocked) {
+      const modal = document.getElementById('securityConfirmModal');
+      const codeInput = document.getElementById('securityModalCodeInput');
+      if (modal) {
+        modal.classList.remove('hidden');
+        if (codeInput) {
+          codeInput.value = '';
+          codeInput.focus();
+        }
+      }
+    } else {
+      const confirmCF = confirm("શું તમે આગામી મહિનામાં કેરી ફોરવર્ડ કરવા માંગો છો?");
+      if (confirmCF) advanceToNextMonthWithCarryForward();
+    }
+  }
+
+  function closeSecurityModal() {
+    const modal = document.getElementById('securityConfirmModal');
+    if (modal) modal.classList.add('hidden');
+  }
+
+  function executePendingSecurityAction() {
+    const codeInput = document.getElementById('securityModalCodeInput');
+    const enteredCode = codeInput ? codeInput.value.trim() : '';
+
+    if (VALID_SECRET_CODES.includes(enteredCode)) {
+      isSystemUnlocked = true;
+      document.body.classList.remove('locked-mode');
+      closeSecurityModal();
+      advanceToNextMonthWithCarryForward();
+    } else {
+      showToast("❌ અમાન્ય સિક્રેટ કોડ!");
+    }
+  }
+
+  function advanceToNextMonthWithCarryForward() {
+    previousMonthSnapshot = {
+      month: selectedMonth,
+      year: selectedYear,
+      savingsMembers: JSON.parse(JSON.stringify(savingsMembers)),
+      borrowers: JSON.parse(JSON.stringify(borrowers)),
+      baseCash,
+      globalPartyKharch,
+      postOffice,
+      isInterestCollected
+    };
+
+    const closingCashThisMonth = getCalculatedCashInHand();
+    baseCash = closingCashThisMonth;
+    globalPartyKharch = 0;
+    isInterestCollected = false;
+
+    borrowers = borrowers.map(item => {
+      const principal = Number(item.amount) || 0;
+      const jama = Number(item.jama) || 0;
+      const remaining = Math.max(0, principal - jama);
+      return {
+        ...item,
+        amount: remaining,
+        jama: 0,
+        carryForwarded: remaining > 0
+      };
+    });
+
+    savingsMembers = savingsMembers.map(m => ({ ...m, paid: false }));
+
+    let currentMonth = parseInt(selectedMonth, 10) + 1;
+    let currentYear = parseInt(selectedYear, 10);
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+
+    selectedMonth = currentMonth;
+    selectedYear = currentYear;
+
+    const monthSelect = document.getElementById('monthSelector');
+    const yearSelect = document.getElementById('yearSelector');
+    if (monthSelect) monthSelect.value = selectedMonth;
+    if (yearSelect) {
+      if (!yearSelect.querySelector(`option[value="${selectedYear}"]`)) {
+        const opt = document.createElement('option');
+        opt.value = selectedYear;
+        opt.innerText = selectedYear;
+        yearSelect.appendChild(opt);
+      }
+      yearSelect.value = selectedYear;
+    }
+
+    onPeriodChange();
+    saveStateToLocalStorage();
+    showToast(`✅ ${gujaratiMonths[currentMonth]} ${currentYear}: કેરી ફોરવર્ડ પૂર્ણ! કેશ: ₹ ${formatINR(baseCash)}`, true);
+  }
+
+  function renderSavings() {
+    const container = document.getElementById('savingsListContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const totalCount = savingsMembers.length;
+    const paidCount = savingsMembers.filter(m => m.paid).length;
+    const allPaid = totalCount > 0 && paidCount === totalCount;
+    const nonePaid = paidCount === 0;
+
+    const masterCheckbox = document.getElementById('masterSavingsCheckbox');
+    if (masterCheckbox) {
+      masterCheckbox.checked = allPaid;
+      masterCheckbox.indeterminate = (!allPaid && !nonePaid);
+    }
+    const selectAllBtnLabel = document.getElementById('selectAllBtnLabel');
+    if (selectAllBtnLabel) {
+      selectAllBtnLabel.innerText = allPaid ? "બધા અનસિલેક્ટ" : "બધા પસંદ";
+    }
+
+    savingsMembers.forEach((item, index) => {
+      const row = document.createElement('div');
+      const lockedClass = isSystemUnlocked ? 'cursor-pointer hover:border-slate-300' : 'cursor-default opacity-85';
+      
+      row.className = `savings-item group bg-white rounded-xl px-3 sm:px-3.5 py-1.5 border select-none transition-all duration-150 ${lockedClass} ${
+        item.paid ? 'border-slate-200/90' : 'border-amber-300 bg-amber-50/40 hover:bg-amber-50/70'
+      } flex items-center justify-between shadow-xs`;
+      row.setAttribute('data-name', item.name.toLowerCase());
+      
+      row.onclick = (e) => {
+        if (e.target.closest('.delete-savings-btn')) return;
+        if (!isSystemUnlocked) {
+          checkIsUnlocked();
+          return;
+        }
+        togglePaymentStatus(item.id);
+      };
+
+      row.innerHTML = `
+        <div class="flex items-center space-x-2.5">
+          <span class="num-badge text-blue-600 font-bold font-mono text-sm">${index + 1}.</span>
+          <input type="checkbox" ${item.paid ? 'checked' : ''} 
+            class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer ${!isSystemUnlocked ? 'pointer-events-none' : ''}"
+            onclick="event.stopPropagation(); if(checkIsUnlocked()){ togglePaymentStatus(${item.id}); }"
+          />
+          <span class="font-bold ${item.paid ? 'text-slate-800' : 'text-slate-600'} text-xs sm:text-sm tracking-tight transition-colors">
+            ${item.name}
+          </span>
+          ${!item.paid ? '<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-100 text-amber-800 border border-amber-200">બાકી</span>' : '<span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">જમા</span>'}
+        </div>
+        <div class="flex items-center space-x-2.5">
+          <span class="font-extrabold font-mono text-xs sm:text-sm tracking-tight ${item.paid ? 'text-slate-900' : 'text-slate-400'}">
+            ₹ ${formatINR(item.amount)}
+          </span>
+          <button type="button" class="w-6 h-6 rounded-md flex items-center justify-center transition-all ${
+            item.paid ? 'bg-emerald-500 text-white shadow-2xs' : 'bg-slate-100 border border-amber-300 text-amber-600'
+          }">
+            <i class="fa-solid ${item.paid ? 'fa-check' : 'fa-clock'} text-xs"></i>
+          </button>
+        </div>
+      `;
+      container.appendChild(row);
+    });
+
+    updateCalculations();
+  }
+
+  function renderBorrowers() {
+    const container = document.getElementById('borrowersListContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const inputReadonlyAttr = !isSystemUnlocked ? 'readonly disabled' : '';
+    const inputCustomStyle = !isSystemUnlocked ? 'bg-slate-100/70 border-slate-200 cursor-not-allowed text-slate-700' : 'bg-white hover:border-orange-300 focus:ring-1 focus:ring-orange-500';
+
+    borrowers.forEach((item, index) => {
+      const principal = Number(item.amount) || 0;
+      const jama = Number(item.jama) || 0;
+      const interest2 = principal * 0.02;
+      const balanceDue = Math.max(0, principal - jama);
+      const hasLoan = principal > 0;
+
+      const row = document.createElement('div');
+      const zeroStyle = !hasLoan ? 'bg-slate-50/70 border-slate-200 text-slate-400' : 'bg-white border-orange-200/80 hover:border-orange-300';
+      row.className = `borrower-item group rounded-xl px-2.5 sm:px-3 py-2 border shadow-xs transition-card ${zeroStyle}`;
+      row.setAttribute('data-borrower-id', item.id);
+      row.setAttribute('data-name', item.name.toLowerCase());
+
+      row.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-1.5 sm:gap-1 items-center">
+          <div class="sm:col-span-4 flex flex-wrap items-center justify-between sm:justify-start gap-1 min-w-0">
+            <div class="flex items-center space-x-1.5 min-w-0">
+              <span class="num-badge ${hasLoan ? 'text-orange-600' : 'text-slate-400'} font-bold font-mono text-xs shrink-0">${index + 1}.</span>
+              <span class="font-bold ${hasLoan ? 'text-slate-800' : 'text-slate-500'} text-xs sm:text-xs truncate" title="${item.name}">${item.name}</span>
+            </div>
+            ${item.carryForwarded ? `
+              <span class="inline-flex items-center text-[9px] font-bold text-amber-800 bg-amber-100/90 border border-amber-300 px-1.5 py-0.5 rounded-full">
+                <i class="fa-solid fa-arrow-turn-down-right mr-1 text-[8px]"></i>C/F
+              </span>
+            ` : ''}
+            ${!hasLoan ? `
+              <span class="text-[9px] font-medium text-slate-400 bg-slate-100 px-1.5 py-0.2 rounded border border-slate-200">ધિરાણ નથી</span>
+            ` : ''}
+            <div class="sm:hidden flex items-center gap-1 ml-auto">
+              <span class="text-[10px] font-bold px-1 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-mono">
+                ૨%: ₹${formatINR(interest2)}
+              </span>
+            </div>
+          </div>
+
+          <!-- Principal Amount Input -->
+          <div class="sm:col-span-2 flex items-center justify-between sm:justify-end">
+            <span class="sm:hidden text-[10px] text-slate-500 font-semibold">મુદ્દલ:</span>
+            <div class="relative flex items-center w-28 sm:w-full">
+              <span class="absolute left-1.5 text-slate-400 font-mono text-[11px] select-none no-print">₹</span>
+              <input 
+                type="number" 
+                step="500" 
+                min="0" 
+                ${inputReadonlyAttr}
+                value="${item.amount}" 
+                oninput="updateBorrowerAmount(${item.id}, this.value, this)"
+                onkeyup="updateBorrowerAmount(${item.id}, this.value, this)"
+                onchange="updateBorrowerAmount(${item.id}, this.value, this)"
+                class="principal-input w-full text-right font-extrabold ${hasLoan ? 'text-slate-900' : 'text-slate-400'} font-mono text-xs pl-4 pr-1.5 py-1 border rounded-md print-input-display transition ${inputCustomStyle}"
+              />
+            </div>
+          </div>
+
+          <!-- 2% Interest Badge -->
+          <div class="hidden sm:flex sm:col-span-2 items-center justify-center">
+            <span class="borrower-row-interest inline-flex items-center px-2 py-0.5 rounded-md ${hasLoan ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-slate-100 text-slate-400 border border-slate-200'} font-mono font-bold text-xs">
+              ₹${formatINR(interest2)}
+            </span>
+          </div>
+
+          <!-- Jama Amount Input (INSTANT SYNC ON INPUT, KEYUP, CHANGE, BLUR) -->
+          <div class="sm:col-span-2 flex items-center justify-between sm:justify-end">
+            <span class="sm:hidden text-[10px] text-emerald-600 font-semibold">જમા:</span>
+            <div class="relative flex items-center w-28 sm:w-full">
+              <span class="absolute left-1.5 text-emerald-500 font-mono text-[11px] select-none no-print">₹</span>
+              <input 
+                type="number" 
+                step="500" 
+                min="0" 
+                ${inputReadonlyAttr}
+                value="${item.jama || 0}" 
+                oninput="updateBorrowerJama(${item.id}, this.value, this)"
+                onkeyup="updateBorrowerJama(${item.id}, this.value, this)"
+                onchange="updateBorrowerJama(${item.id}, this.value, this)"
+                onblur="updateBorrowerJama(${item.id}, this.value, this)"
+                class="jama-input w-full text-right font-extrabold text-emerald-700 font-mono text-xs pl-4 pr-1.5 py-1 border border-emerald-200 rounded-md print-input-display transition ${!isSystemUnlocked ? 'bg-slate-100/70 cursor-not-allowed' : 'bg-emerald-50/30 hover:border-emerald-400 focus:ring-1 focus:ring-emerald-500'}"
+                title="જમા રકમ લખો (તુરંત બાદ થશે)"
+              />
+            </div>
+          </div>
+
+          <!-- Member Balance Due (બાકી મુદ્દલ: મુદ્દલ - જમા) -->
+          <div class="sm:col-span-1 flex items-center justify-between sm:justify-end">
+            <span class="sm:hidden text-[10px] text-rose-600 font-semibold">બાકી:</span>
+            <span class="font-extrabold font-mono text-xs text-right ${balanceDue === 0 ? 'text-slate-400' : 'text-rose-700'} borrower-row-balance">
+              ₹${formatINR(balanceDue)}
+            </span>
+          </div>
+
+          <!-- Reset Action -->
+          <div class="sm:col-span-1 flex items-center justify-end sm:justify-center no-print">
+            <button 
+              type="button" 
+              class="${isSystemUnlocked ? 'opacity-70 hover:opacity-100 text-slate-400 hover:text-red-500' : 'hidden'} transition px-1 py-1 rounded cursor-pointer" 
+              title="ધિરાણ શૂન્ય કરો" 
+              onclick="clearBorrowerLoan(${item.id})">
+              <i class="fa-solid fa-rotate-left text-xs"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      container.appendChild(row);
+    });
+
+    updateCalculations();
+  }
+
+  function togglePaymentStatus(memberId) {
+    if (!checkIsUnlocked()) return;
+    const target = savingsMembers.find(m => m.id === memberId);
+    if (!target) return;
+
+    target.paid = !target.paid;
+    renderSavings();
+    saveStateToLocalStorage();
+  }
+
+  function addQuickSavingsMember() {
+    if (!checkIsUnlocked()) return;
+    const input = document.getElementById('quickSavingsNameInput');
+    const name = input ? input.value.trim() : '';
+    if (!name) return;
+
+    const newId = Date.now();
+    savingsMembers.push({ id: newId, name, amount: 1000, paid: true });
+
+    if (!borrowers.find(b => b.name === name)) {
+      borrowers.push({ id: newId + 1, name, amount: 0, jama: 0, carryForwarded: false });
+    }
+
+    if (input) input.value = '';
+    renderSavings();
+    renderBorrowers();
+    saveStateToLocalStorage();
+    showToast(`✅ નવો સભ્ય ઉમેરાયો: ${name}`, true);
+  }
+
+  function updateBorrowerAmount(id, val, inputEl) {
+    if (!checkIsUnlocked()) return;
+    const parsed = Math.max(0, parseFloat(val) || 0);
+    const borrower = borrowers.find(b => b.id === id);
+    if (!borrower) return;
+
+    borrower.amount = parsed;
+    
+    // Update individual row values immediately
+    const row = document.querySelector(`.borrower-item[data-borrower-id="${id}"]`);
+    if (row) {
+      const balanceSpan = row.querySelector('.borrower-row-balance');
+      const interestSpan = row.querySelector('.borrower-row-interest');
+      const bal = Math.max(0, parsed - (Number(borrower.jama) || 0));
+      if (balanceSpan) {
+        balanceSpan.innerText = `₹${formatINR(bal)}`;
+        balanceSpan.className = `font-extrabold font-mono text-xs text-right ${bal === 0 ? 'text-slate-400' : 'text-rose-700'} borrower-row-balance`;
+      }
+      if (interestSpan) {
+        interestSpan.innerText = `₹${formatINR(parsed * 0.02)}`;
+      }
+    }
+
+    updateCalculations();
+    saveStateToLocalStorage();
+  }
+
+  // INSTANT REAL-TIME JAMA SYNC FUNCTION
+  function updateBorrowerJama(id, val, inputEl) {
+    if (!checkIsUnlocked()) return;
+    const parsed = Math.max(0, parseFloat(val) || 0);
+    const borrower = borrowers.find(b => b.id === id);
+    if (!borrower) return;
+
+    borrower.jama = parsed;
+
+    // Update the row's balance span in real-time (બાકી મુદ્દલ = મુદ્દલ - જમા)
+    const row = document.querySelector(`.borrower-item[data-borrower-id="${id}"]`);
+    if (row) {
+      const balanceSpan = row.querySelector('.borrower-row-balance');
+      if (balanceSpan) {
+        const bal = Math.max(0, (Number(borrower.amount) || 0) - parsed);
+        balanceSpan.innerText = `₹${formatINR(bal)}`;
+        balanceSpan.className = `font-extrabold font-mono text-xs text-right ${bal === 0 ? 'text-slate-400' : 'text-rose-700'} borrower-row-balance`;
+      }
+    }
+
+    // Immediately recalculate & update all totals across the entire page synchronously
+    updateCalculations();
+    saveStateToLocalStorage();
+  }
+
+  function clearBorrowerLoan(id) {
+    if (!checkIsUnlocked()) return;
+    const borrower = borrowers.find(b => b.id === id);
+    if (!borrower) return;
+
+    borrower.amount = 0;
+    borrower.jama = 0;
+    borrower.carryForwarded = false;
+
+    renderBorrowers();
+    saveStateToLocalStorage();
+    showToast(`🔄 ${borrower.name} નું ધિરાણ શૂન્ય કર્યું.`, true);
+  }
+
+  // MASTER REAL-TIME CALCULATION FUNCTION: Synchronizes All Figures Immediately
+  function updateCalculations() {
+    const totalMembers = savingsMembers.length;
+    const paidMembers = savingsMembers.filter(m => m.paid).length;
+    const totalSavingsCollected = calculateTotalSavings();
+
+    const activeBorrowersCount = borrowers.filter(b => (Number(b.amount) || 0) > 0 || ((Number(b.amount) || 0) - (Number(b.jama) || 0)) > 0).length;
+
+    const totalLoanPrincipal = calculateTotalLoanPrincipal();
+    const totalInterest = calculateTotalInterest();
+    const totalJama = calculateTotalJama();
+    
+    // CRITICAL: Net Remaining Loan = Total Principal - Total Jama
+    const netRemainingLoan = Math.max(0, totalLoanPrincipal - totalJama);
+
+    // Dynamic Cash in Hand = Base Cash (30,700) + Total Jama - Party Expense
+    const dynamicCashInHand = getCalculatedCashInHand();
+
+    // Grand Balance = Net Remaining Loan + Post Office + Dynamic Cash in Hand
+    // Initial: 3,51,000 + 3,10,000 + 30,700 = 6,91,700
+    const grandBalance = netRemainingLoan + (Number(postOffice) || 0) + dynamicCashInHand;
+
+    // 1. Update KPI Summary Cards
+    const statTotalMembers = document.getElementById('statTotalMembers');
+    if (statTotalMembers) statTotalMembers.innerText = totalMembers;
+
+    const statPaidMembers = document.getElementById('statPaidMembers');
+    if (statPaidMembers) statPaidMembers.innerText = paidMembers;
+
+    const statPaidSubtext = document.getElementById('statPaidSubtext');
+    if (statPaidSubtext) statPaidSubtext.innerText = `${paidMembers} / ${totalMembers} સભ્યો ચૂકવેલ`;
+
+    const statLoanMembers = document.getElementById('statLoanMembers');
+    if (statLoanMembers) statLoanMembers.innerText = activeBorrowersCount;
+
+    const statLoanCountSubtext = document.getElementById('statLoanCountSubtext');
+    if (statLoanCountSubtext) statLoanCountSubtext.innerText = `${activeBorrowersCount} ધિરાણ ખાતા`;
+
+    // 2. Update Savings Subtotal
+    const savingsCountDisplay = document.getElementById('savingsCountDisplay');
+    if (savingsCountDisplay) savingsCountDisplay.innerText = totalMembers;
+
+    const calculatedTotalSavings = document.getElementById('calculatedTotalSavings');
+    if (calculatedTotalSavings) calculatedTotalSavings.innerText = `₹ ${formatINR(totalSavingsCollected)}`;
+
+    // 3. Update Loan Summary Banner (Principal, Interest, Total Jama, Net Remaining)
+    const displayTotalLoanAmount = document.getElementById('displayTotalLoanAmount');
+    if (displayTotalLoanAmount) displayTotalLoanAmount.innerText = `₹ ${formatINR(totalLoanPrincipal)}`;
+
+    const displayTotalInterestAmount = document.getElementById('displayTotalInterestAmount');
+    if (displayTotalInterestAmount) displayTotalInterestAmount.innerText = `₹ ${formatINR(totalInterest)}`;
+
+    // Total Jama Display: Reflects the sum of all jama amounts in real time
+    const displayTotalJamaAmount = document.getElementById('displayTotalJamaAmount');
+    if (displayTotalJamaAmount) displayTotalJamaAmount.innerText = `₹ ${formatINR(totalJama)}`;
+
+    // Net Remaining Loan Display: Total Principal minus Total Jama in real time
+    const displayNetRemainingAmount = document.getElementById('displayNetRemainingAmount');
+    if (displayNetRemainingAmount) displayNetRemainingAmount.innerText = `₹ ${formatINR(netRemainingLoan)}`;
+
+    // 4. Update Overall Financial Status Rows
+    // In Financial Status: Row labeled 'કુલ ધિરાણ રકમ (ચોખ્ખી બાકી રકમ)'
+    const statRowLoanAmount = document.getElementById('statRowLoanAmount');
+    if (statRowLoanAmount) statRowLoanAmount.innerText = `₹ ${formatINR(netRemainingLoan)}`;
+
+    // Cash In Hand Input
+    const cashInHandGlobalInput = document.getElementById('cashInHandGlobalInput');
+    if (cashInHandGlobalInput) cashInHandGlobalInput.value = dynamicCashInHand;
+
+    // Available Cash Display Badges
+    const availableCashAmountDisplay = document.getElementById('availableCashAmountDisplay');
+    if (availableCashAmountDisplay) availableCashAmountDisplay.innerText = `₹ ${formatINR(dynamicCashInHand)}`;
+
+    const partyMaxAvailableCashText = document.getElementById('partyMaxAvailableCashText');
+    if (partyMaxAvailableCashText) partyMaxAvailableCashText.innerText = `₹ ${formatINR(dynamicCashInHand)}`;
+
+    // 5. Update Grand Total Balance
+    const grandBalanceDisplay = document.getElementById('grandBalanceDisplay');
+    if (grandBalanceDisplay) grandBalanceDisplay.innerText = `₹ ${formatINR(grandBalance)}`;
+
+    // 6. Update Input Values
+    const postOfficeInput = document.getElementById('postOfficeGlobalInput');
+    if (postOfficeInput) postOfficeInput.value = postOffice;
+
+    const partyKharchInput = document.getElementById('partyKharchGlobalInput');
+    if (partyKharchInput) partyKharchInput.value = globalPartyKharch;
+
+    updateInterestActionUI();
+  }
+
+  function filterMembers() {
+    const q = (document.getElementById('memberSearchInput').value || '').trim().toLowerCase();
+    document.querySelectorAll('.savings-item').forEach(el => {
+      const name = el.getAttribute('data-name') || '';
+      el.style.display = name.includes(q) ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.borrower-item').forEach(el => {
+      const name = el.getAttribute('data-name') || '';
+      el.style.display = name.includes(q) ? 'block' : 'none';
+    });
+  }
+
+  function exportPDFReport() {
+    const element = document.getElementById('report-container');
+    const printDate = document.getElementById('printReportGeneratedDate');
+    if (printDate) printDate.innerText = getRealTimeFormattedDate();
+
+    const opt = {
+      margin: [6, 8, 6, 8],
+      filename: `Youngster_Group_${gujaratiMonths[selectedMonth]}_${selectedYear}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    if (window.html2pdf) {
+      window.html2pdf().set(opt).from(element).save();
+      showToast("📄 PDF ડાઉનલોડ શરૂ થઈ ગઈ છે!", true);
+    } else {
+      window.print();
+    }
+  }
+
+  function exportJSONData() {
+    saveStateToLocalStorage();
+    const raw = localStorage.getItem(MASTER_STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
+    const textarea = document.getElementById('jsonBackupTextarea');
+    if (textarea) textarea.value = raw;
+
+    const modal = document.getElementById('jsonBackupModal');
+    if (modal) modal.classList.remove('hidden');
+
+    try {
+      const blob = new Blob([raw], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Youngster_Group_Backup_${selectedYear}_${padZero(selectedMonth + 1)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.log("Direct download fallback to modal");
+    }
+    showToast("💾 JSON બેકઅપ ડેટા તૈયાર છે!", true);
+  }
+
+  function copyJSONTextareaContent() {
+    const textarea = document.getElementById('jsonBackupTextarea');
+    if (textarea) {
+      textarea.select();
+      navigator.clipboard.writeText(textarea.value);
+      showToast("✅ JSON ડેટા ક્લિપબોર્ડમાં કોપી થઈ ગયો!", true);
+    }
+  }
+
+  function openImportModalOrTriggerFile() {
+    if (!isSystemUnlocked) {
+      const pass = prompt("🔒 ડેટા ઈમ્પોર્ટ કરવા માટે એડમિન સિક્રેટ કોડ (1234) દાખલ કરો:");
+      if (pass === null) return;
+      if (!VALID_SECRET_CODES.includes(pass.trim())) {
+        showToast("❌ ખોટો સિક્રેટ કોડ!");
+        return;
+      }
+      const passInput = document.getElementById('secretPasscode');
+      if (passInput) passInput.value = pass.trim();
+      verifySecretCode();
+    }
+    const modal = document.getElementById('jsonImportModal');
+    if (modal) modal.classList.remove('hidden');
+  }
+
+  function handleImportFileSelected(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      const content = evt.target.result;
+      const textarea = document.getElementById('jsonImportTextarea');
+      if (textarea) textarea.value = content;
+    };
+    reader.readAsText(file);
+  }
+
+  function executeJSONImport() {
+    const textarea = document.getElementById('jsonImportTextarea');
+    const content = textarea ? textarea.value.trim() : '';
+    if (!content) {
+      showToast("❌ કૃપા કરીને JSON ફાઇલ અપલોડ કરો અથવા કોડ પેસ્ટ કરો.");
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(content);
+      if (Array.isArray(parsed.savingsMembers)) savingsMembers = parsed.savingsMembers;
+      if (Array.isArray(parsed.borrowers)) borrowers = parsed.borrowers;
+      if (typeof parsed.baseCash === 'number') {
+        baseCash = parsed.baseCash;
+      } else if (typeof parsed.openingCashInHand === 'number') {
+        baseCash = parsed.openingCashInHand;
+      }
+      if (typeof parsed.globalPartyKharch === 'number') globalPartyKharch = parsed.globalPartyKharch;
+      if (typeof parsed.postOffice === 'number') postOffice = parsed.postOffice;
+      if (typeof parsed.isInterestCollected === 'boolean') isInterestCollected = parsed.isInterestCollected;
+      if (typeof parsed.selectedMonth === 'number') selectedMonth = parsed.selectedMonth;
+      if (parsed.selectedYear) selectedYear = parsed.selectedYear;
+
+      saveStateToLocalStorage();
+      onPeriodChange();
+
+      const modal = document.getElementById('jsonImportModal');
+      if (modal) modal.classList.add('hidden');
+      showToast("✅ JSON ડેટા સફળતાપૂર્વક ઈમ્પોર્ટ થઈ ગયો!", true);
+    } catch (err) {
+      showToast("❌ અમાન્ય JSON ડેટા! કૃપા કરીને સાચી ફાઇલ ચકાસો.");
+    }
+  }
+
+  // Initialization on load
+  document.addEventListener('DOMContentLoaded', () => {
+    loadStateFromLocalStorage();
+    syncRealTimeDateDisplay();
+    renderSavings();
+    renderBorrowers();
+    updateCalculations();
+  });
+</script>
+</body></html>
